@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Types;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 
-class UserAuthRequest extends FormRequest
+class TypeCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +26,7 @@ class UserAuthRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'email' => 'required|string|unique:users,email',
-            'password' => 'required|string|confirmed'
+            'title' => 'required|string|max:80',
         ];
     }
 
@@ -43,11 +41,8 @@ class UserAuthRequest extends FormRequest
     public function messages() 
     {
         return [
-            'name.required' => 'O campo nome é obrigatório',
-            'email.required' => 'O campo email é obrigatório',
-            'email.unique' => 'Já possui um usuário com esse email cadastrado!',
-            'password.required' => 'O campo senha é obrigatório',
-            'password.confirmed' => 'Os campos de senha não conferem'
+            'title.required' => 'O campo title é obrigatório',
+            'title.max' => 'O máximo de caracteres permitido são 80.'
         ];
     }
 }
