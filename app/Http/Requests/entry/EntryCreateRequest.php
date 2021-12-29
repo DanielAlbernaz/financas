@@ -27,6 +27,7 @@ class EntryCreateRequest extends FormRequest
     {
         return [
             'value' => 'required|numeric|regex:/^-?[0-9]+(?:.[0-9]{1,2})?$/',
+            'date' => 'required|date',
             'type_id' => 'required|integer',
             'category_id' => 'required|integer',
             'description' => 'required|string|max:255',
@@ -42,11 +43,17 @@ class EntryCreateRequest extends FormRequest
             'data'      => $validator->errors()
         ]));
     }
+    
     public function messages() 
     {
         return [
-            'title.required' => 'O campo title é obrigatório',
-            'title.max' => 'O máximo de caracteres permitido são 80.'
+            'value.required' => 'O campo value é obrigatório',
+            'date.required' => 'O campo date é obrigatório',
+            'value.regex' => 'Formato invalido',
+            'value.numeric' => 'O compo é do tipo numeric.',
+            'description.required' => 'O compo description é obrigatório.',
+            'description.max' => 'O maximo de caracteres aceitos são 255.',
+            'note.max' => 'O maximo de caracteres aceitos são 1000.',
         ];
     }
 }

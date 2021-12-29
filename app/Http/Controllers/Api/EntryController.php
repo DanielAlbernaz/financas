@@ -39,15 +39,14 @@ class EntryController extends Controller
     public function create(EntryCreateRequest $request)
     {       
         $fields = $request->validated();
-
-        $type = Entry::create([
-            'title' => $fields['title']
-        ]);
-
+        $entries = Entry::create($request->all());
+        
         $response = [
-            'type' =>   $type
-        ];
-
+                'status' =>   1,
+                'message' =>   'Cadastrado com sucesso!',
+                'entry' =>   $entries
+            ];
+            
         return response($response, 201);
     }
 
@@ -69,9 +68,20 @@ class EntryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EntryCreateRequest $request, $id)
     {
-        //
+        $fields = $request->validated();
+
+        $entries = Entry::find($id);
+        $entries->update($request->all());
+        
+        $response = [
+                'status' =>   200,
+                'message' =>   'Alterado com sucesso!',
+                'entry' =>   $entries
+            ];
+            
+        return response($response, 201);
     }
 
     /**
@@ -82,6 +92,13 @@ class EntryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $entry = Entry::destroy($id);
+
+        $response = [
+            'status' =>   'excluído  com sucesso!',
+            'entry' =>   $entry
+        ];
+        
+    return response($response, 201);
     }
 }

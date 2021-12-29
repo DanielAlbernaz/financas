@@ -24,26 +24,27 @@ Route::post('auth/register', [AuthController::class, 'register']);
 // Protected routes
 Route::group(['middleware' => ['apiJwt']], function(){
 
-    //Login
+    //Login*
     Route::get('auth/logout',  [AuthController::class, 'logout']);
 
     //Users
     Route::get('users/',  [UserController::class, 'index']);
 
-    //categories
+    //Categories
     Route::post('categories/', [CategoryController::class, 'create']);
     Route::get('categories/', [CategoryController::class, 'index']);
     Route::put('categories/{categories}', [CategoryController::class, 'update']);
 
-    //types
+    //Types
     Route::post('types/', [TypeController::class, 'create']);
     Route::get('types/', [TypeController::class, 'index']);
     Route::put('types/{types}', [TypeController::class, 'update']);
 
-    //types
+    //Entry
     Route::post('entry/', [EntryController::class, 'create']);
     Route::get('entry/', [EntryController::class, 'index']);
     Route::put('entry/{entry}', [EntryController::class, 'update']);
+    Route::delete('entry/{entry}', [EntryController::class, 'destroy']);
 
 });
 

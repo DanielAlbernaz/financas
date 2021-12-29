@@ -16,6 +16,9 @@ class Entry extends Model
 
     protected $fillable = [
         'value',
+        'date',
+        'type_id',
+        'category_id',
         'description',
         'note',
     ];
